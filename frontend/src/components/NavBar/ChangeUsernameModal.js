@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+
+const ChangeUsernameModal = ({ isOpen, onClose }) => {
+  const [newUsername, setNewUsername] = useState('');
+
+  const handleChangeUsername = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/change-username', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',  // Ensures cookies (like the JWT) are sent with the request
+        body: JSON.stringify({ username: newUsername }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to change username');
+      }
+
+      localStorage.setItem('username', newUsername);
+
+      toast.success('Username updated successfully!', { position: 'top-right', autoClose: 2000 });
+      onClose();
+    } catch (error) {
+      toast.error('Error changing username. Please try again.', { position: 'top-right', autoClose: 2000 });
+    }
+  };
+
+  return (
+    isOpen && (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-0 z-50">
+        <div className="bg-white p-6 rounded-lg shadow-xl w-[320px] h-[320px] relative">
+          <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">
+            &times;
+          </button>
+          <h2 className="text-2xl font-bold mb-4 text-center">Change Username</h2>
+          <input
+            type="text"
+            value={newUsername}
+            onChange={(e) => setNewUsername(e.target.value)}
+            className="border border-gray-500 px-2 py-1 mt-5 rounded w-full"
+            placeholder="Enter new username"
+          />
+          <button
+            onClick={handleChangeUsername}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full mt-10"
+          >
+            Save
+          </button>
+          <button
+            onClick={onClose}
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-full mt-4"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    )
+  );
+};
+
+export default ChangeUsernameModal;
