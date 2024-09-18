@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes');
 const playerRoutes = require('./routes/playerRoutes');
+const gamesRoutes = require('./routes/gamesRoutes');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', playerRoutes);
+app.use('/api', gamesRoutes);
 
 // Email verification route
 // This is to handle the email verification link that the user clicks

@@ -161,7 +161,7 @@ const PlayerManagement = () => {
           {teamName || 'My Team'}
         </h1>
         
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6 ml-10">
           {/* AddPlayerForm */}
           <div>
             <AddPlayerForm addPlayer={addPlayer} />

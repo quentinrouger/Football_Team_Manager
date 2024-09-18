@@ -8,6 +8,7 @@ import Login from './components/Homepage/Login';
 import PlayerManagement from './components/PlayerManagement/PlayerManagement';
 import StatsDashboard from './components/Stats/StatsDashboard';
 import MedicalCenter from './components/MedicalCenter/MedicalCenter';
+import Games from './components/GamesManagement/GamesManagement';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -59,6 +60,10 @@ function App() {
           <Route
             path='/medical-center'
             element={isAuthenticated ? <MedicalCenter /> : <Navigate to="/login" />}
+          />
+          <Route
+            path='/games'
+            element={isAuthenticated ? <Games /> : <Navigate to="/login" />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

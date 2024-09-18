@@ -21,13 +21,6 @@ const AddPlayerForm = ({ addPlayer }) => {
     formData.append('phoneNumber', phoneNumber);
     formData.append('mail', mail);
     formData.append('notes', '');
-    formData.append('goals', 0);
-    formData.append('assists', 0);
-    formData.append('yellowCards', 0);
-    formData.append('redCards', 0);
-    formData.append('minutesPlayed', 0);
-    formData.append('gamesPlayed', 0);
-    formData.append('gamesStarted', 0);
     formData.append('isInjured', 0);
 
     addPlayer(formData);
@@ -115,7 +108,6 @@ const AddPlayerForm = ({ addPlayer }) => {
                 </select>
               </div>
 
-              {/* New phone number field */}
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
                   Phone Number
@@ -130,7 +122,6 @@ const AddPlayerForm = ({ addPlayer }) => {
                 />
               </div>
 
-              {/* New mail field */}
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mail">
                   Email
@@ -145,10 +136,10 @@ const AddPlayerForm = ({ addPlayer }) => {
                 />
               </div>
               <div className="mb-4">
-                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photo">
-                   Photo
-                 </label>
-                 <input
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photo">
+                  Photo
+                </label>
+                <input
                   type="file"
                   id="photo"
                   accept="image/*"

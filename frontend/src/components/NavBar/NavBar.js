@@ -56,6 +56,7 @@ const NavBar = () => {
             <Link to="/players" className="text-white mx-4 hover:underline">My Team</Link>
             <Link to="/stats" className="text-white mx-4 hover:underline">Statistics</Link>
             <Link to="/medical-center" className="text-white mx-4 hover:underline">Medical Center</Link>
+            <Link to="/games" className="text-white mx-4 hover:underline">Games</Link>
             <button
             onClick={() => setSettingsOpen(true)}
             className="bg-neutral-200 hover:bg-neutral-300 text-white font-bold py-2 px-4 mx-4 rounded"

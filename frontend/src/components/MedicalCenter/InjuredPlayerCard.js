@@ -76,7 +76,7 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
             className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleRemoveClick}
           >
-            Remove player
+            Remove
           </button>
         </>
       )}
@@ -108,22 +108,25 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
 
       {/* Back side */}
       <div
-        className={`absolute inset-0 rounded-lg backface-hidden transition-transform duration-500 ease-in-out p-7 flex flex-col justify-center items-center ${
+        className={`absolute inset-0 rounded-lg backface-hidden transition-transform duration-500 ease-in-out p-5 flex flex-col justify-center items-center ${
           isFlipped ? 'block' : 'hidden'
         }`}
       >
-        {/* <h2 className="text-xl font-bold mb-10 text-stone-200 text-center transform rotate-y-180">{player.name}</h2>
-        <p className="text-md font-semibold text-stone-200 text-center transform rotate-y-180"> {player.notes}</p> */}
         {/* Container for name and notes */}
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col justify-between h-full w-full">
           {/* Name at the top */}
-          <h2 className="text-xl font-bold text-stone-200 text-center transform rotate-y-180 ">
+          <h2 className="text-xl font-bold text-stone-200 text-center mb-0 transform rotate-y-180">
             {player.name}
           </h2>
 
-          {/* Notes centered vertically */}
-          <div className="flex-grow flex items-center justify-center">
-            <p className="text-md font-semibold text-stone-200 text-center transform rotate-y-180">
+          {/* Notes section */}
+          <div className="flex flex-col items-center mt-10 mb-auto ml-5 mr-5">
+            {/* Notes header, centered horizontally, slightly above the middle */}
+            <h2 className="text-md font-bold text-stone-200 text-center mb-2 transform rotate-y-180">
+              Notes:
+            </h2>
+            {/* Actual notes content */}
+            <p className="text-md font-semibold text-stone-200 text-justify transform rotate-y-180">
               {player.notes}
             </p>
           </div>

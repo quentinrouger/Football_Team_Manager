@@ -8,7 +8,6 @@ const formatDateForInput = (isoDate) => {
   return date.toISOString().split('T')[0]; // Extract and return the YYYY-MM-DD part
 };
 
-
 const EditPlayerModal = ({ player, onSave, onClose }) => {
   const [formData, setFormData] = useState({
     name: player.name,
@@ -16,15 +15,8 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
     phoneNumber: player.phoneNumber,
     mail: player.mail,
     position: player.position,
-    goals: player.goals,
-    assists: player.assists,
-    yellowCards: player.yellowCards,
-    redCards: player.redCards,
-    minutesPlayed: player.minutesPlayed,
-    gamesPlayed: player.gamesPlayed,
-    gamesStarted: player.gamesStarted,
     photo: null,
-    existingPhoto: player.photo
+    existingPhoto: player.photo,
   });
 
   useEffect(() => {
@@ -34,15 +26,8 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
       phoneNumber: player.phoneNumber,
       mail: player.mail,
       position: player.position,
-      goals: player.goals,
-      assists: player.assists,
-      yellowCards: player.yellowCards,
-      redCards: player.redCards,
-      minutesPlayed: player.minutesPlayed,
-      gamesPlayed: player.gamesPlayed,
-      gamesStarted: player.gamesStarted,
       photo: null,
-      existingPhoto: player.photo
+      existingPhoto: player.photo,
     });
   }, [player]);
 
@@ -77,21 +62,21 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
       updatedFormData.append('existingPhoto', formData.existingPhoto);
     }
 
-  try {
-    await onSave(player.id, updatedFormData);
-    
-    toast.success('Player updated successfully!');
+    try {
+      await onSave(player.id, updatedFormData);
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
-    
-    onClose();
-  } catch (error) {
-    console.error('Error saving player:', error);
-    toast.error('Error updating player.');
-  }
-};
+      toast.success('Player updated successfully!');
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+
+      onClose();
+    } catch (error) {
+      console.error('Error saving player:', error);
+      toast.error('Error updating player.');
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -100,23 +85,23 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
           <h2 className="text-xl font-bold mb-4">Edit Player</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='name'>Name</label>
+              <label className="block text-gray-700" htmlFor="name">Name</label>
               <input
                 name="name"
-                id='name'
+                id="name"
                 type="text"
                 value={formData.name}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full"
                 required
-                autoComplete='name'
+                autoComplete="name"
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='birthDate'>Birth Date</label>
+              <label className="block text-gray-700" htmlFor="birthDate">Birth Date</label>
               <input
                 name="birthDate"
-                id='birthDate'
+                id="birthDate"
                 type="date"
                 value={formData.birthDate}
                 onChange={handleInputChange}
@@ -125,10 +110,10 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='phoneNumber'>Phone Number</label>
+              <label className="block text-gray-700" htmlFor="phoneNumber">Phone Number</label>
               <input
                 name="phoneNumber"
-                id='phoneNumber'
+                id="phoneNumber"
                 type="text"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
@@ -137,10 +122,10 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='mail'>Email</label>
+              <label className="block text-gray-700" htmlFor="mail">Email</label>
               <input
                 name="mail"
-                id='mail'
+                id="mail"
                 type="email"
                 value={formData.mail}
                 onChange={handleInputChange}
@@ -149,10 +134,10 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='position'>Position</label>
+              <label className="block text-gray-700" htmlFor="position">Position</label>
               <select
                 name="position"
-                id='position'
+                id="position"
                 value={formData.position}
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full"
@@ -166,87 +151,10 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='goals'>Goals</label>
-              <input
-                name="goals"
-                id='goals'
-                type="number"
-                value={formData.goals}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='assists'>Assists</label>
-              <input
-                name="assists"
-                id='assists'
-                type="number"
-                value={formData.assists}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='yellowCards'>Yellow Cards</label>
-              <input
-                name="yellowCards"
-                id='yellowCards'
-                type="number"
-                value={formData.yellowCards}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='redCards'>Red Cards</label>
-              <input
-                name="redCards"
-                id='redCards'
-                type="number"
-                value={formData.redCards}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='redCards'>Games played</label>
-              <input
-                name="gamesPlayed"
-                id='gamesPlayed'
-                type="number"
-                value={formData.gamesPlayed}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='redCards'>Games started</label>
-              <input
-                name="gamesStarted"
-                id='gamesStarted'
-                type="number"
-                value={formData.gamesStarted}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='minutesPlayed'>Minutes Played</label>
-              <input
-                name="minutesPlayed"
-                id='minutesPlayed'
-                type="number"
-                value={formData.minutesPlayed}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700" htmlFor='photo'>Photo</label>
+              <label className="block text-gray-700" htmlFor="photo">Photo</label>
               <input
                 name="photo"
-                id='photo'
+                id="photo"
                 type="file"
                 onChange={handleFileChange}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full"

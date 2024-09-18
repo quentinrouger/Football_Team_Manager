@@ -128,7 +128,8 @@ const MedicalCenter = () => {
         <h1 className="text-6xl text-white text-center font-bold m-12">Medical Center</h1>
         <button
           onClick={handleAddToMedicalCenter}
-          className="bg-red-500 text-white py-2 px-4 rounded mb-6"
+          // className="bg-red-500 text-white py-2 px-4 rounded mb-6 ml-10"
+          className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 ml-10"
         >
           Add Player to Medical Center
         </button>

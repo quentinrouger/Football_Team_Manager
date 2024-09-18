@@ -17,14 +17,14 @@ const getPlayers = (req, res) => {
   });
 };
 const createPlayer = (req, res) => {
-  const { name, birthDate, position, goals, assists, yellowCards, redCards, minutesPlayed, gamesPlayed, gamesStarted, phoneNumber, mail, notes, isInjured } = req.body;
+  const { name, birthDate, position, phoneNumber, mail, notes, isInjured } = req.body;
   const photo = req.file ? req.file.filename : null; // Handle file upload
   const userId = req.user.id;
-  
-  const sql = 'INSERT INTO players (name, birthDate, position, userId, photo, goals, assists, yellowCards, redCards, minutesPlayed, gamesPlayed, gamesStarted, phoneNumber, mail, notes, isInjured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  db.query(sql, [name, birthDate, position, userId, photo, goals, assists, yellowCards, redCards, minutesPlayed, gamesPlayed, gamesStarted, phoneNumber, mail, notes, isInjured], (err, result) => {
+
+  const sql = 'INSERT INTO players (name, birthDate, position, userId, photo, phoneNumber, mail, notes, isInjured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  db.query(sql, [name, birthDate, position, userId, photo, phoneNumber, mail, notes, isInjured], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json({ id: result.insertId, name, birthDate, position, photo, goals, assists, yellowCards, redCards, minutesPlayed, gamesPlayed, gamesStarted, phoneNumber, mail, notes, isInjured });
+    res.json({ id: result.insertId, name, birthDate, position, photo, phoneNumber, mail, notes, isInjured });
   });
 };
 
@@ -36,15 +36,12 @@ const updatePlayer = (req, res) => {
       return res.status(500).json({ error: err.message });
     }
 
-    console.log('Request Body:', req.body); // Log the incoming request body
-    console.log('Player ID:', req.params.id); // Log the player ID
-    
-    const { name, birthDate, position, goals, assists, yellowCards, redCards, minutesPlayed, gamesPlayed, gamesStarted, phoneNumber, mail, notes } = req.body;
+    const { name, birthDate, position, phoneNumber, mail, notes } = req.body;
     const { id } = req.params;
     const userId = req.user.id; // Extracted from JWT
     const newPhoto = req.file ? req.file.filename : null; // New photo or null if no photo is uploaded
     const existingPhoto = req.body.existingPhoto; // Existing photo filename from the request body
-    
+
     // Use new photo if uploaded, otherwise keep the existing photo
     const photoToUpdate = newPhoto || existingPhoto;
 
@@ -56,8 +53,8 @@ const updatePlayer = (req, res) => {
       }
 
       // If the player exists and belongs to the user, proceed with the update
-      const sql = 'UPDATE players SET name = ?, birthDate = ?, position = ?, photo = ?, goals = ?, assists = ?, yellowCards = ?, redCards = ?, minutesPlayed = ?, gamesPlayed = ?, gamesStarted = ?, phoneNumber = ?, mail = ?, notes = ? WHERE id = ? AND userId = ?';
-      db.query(sql, [name, birthDate, position, photoToUpdate, goals, assists, yellowCards, redCards, minutesPlayed, gamesPlayed, gamesStarted, phoneNumber, mail, notes, id, userId], (err) => {
+      const sql = 'UPDATE players SET name = ?, birthDate = ?, position = ?, photo = ?, phoneNumber = ?, mail = ?, notes = ? WHERE id = ? AND userId = ?';
+      db.query(sql, [name, birthDate, position, photoToUpdate, phoneNumber, mail, notes, id, userId], (err) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ message: 'Player updated successfully' });
       });

@@ -1,7 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [playerStats, setPlayerStats] = useState({
+    total_goals: 0,
+    total_assists: 0,
+    total_minutes_played: 0,
+    total_yellow_cards: 0,
+    total_red_cards: 0,
+    total_games_played: 0,
+  });
+
+  // Fetch player stats from the player_match_stats table
+  useEffect(() => {
+    const fetchPlayerStats = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/playerStats/${player.id}`, {
+          method: 'GET',
+          credentials: 'include', // include cookies
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Check if the request was successful
+        if (!response.ok) {
+          throw new Error(`Failed to fetch player stats: ${response.statusText}`);
+        }
+
+        // Parse the JSON response and update player stats
+        const data = await response.json();
+        setPlayerStats(data);
+      } catch (error) {
+        console.error('Error fetching player stats:', error);
+      }
+    };
+
+    fetchPlayerStats();
+  }, [player.id]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -60,10 +96,8 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
       onClick={handleFlip}
       style={{ perspective: '1000px' }}
     >
-      {/* Only show buttons on the front side */}
       {!isFlipped && (
         <>
-          {/* Edit button */}
           <button
             className="absolute top-2 left-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleEditClick}
@@ -71,7 +105,6 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
             Edit
           </button>
 
-          {/* Delete button */}
           <button
             className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleDeleteClick}
@@ -81,7 +114,6 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
         </>
       )}
 
-      {/* Front side */}
       <div
         className={`absolute inset-0 backface-hidden rounded-xl flex flex-col justify-center items-center ${
           isFlipped ? 'hidden' : 'block'
@@ -100,7 +132,6 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
         <p className="text-md font-semibold text-stone-200 text-center">Position: {player.position}</p>
       </div>
 
-      {/* Back side */}
       <div
         className={`absolute inset-0 rounded-lg backface-hidden transition-transform duration-500 ease-in-out p-7 flex flex-col justify-center items-center ${
           isFlipped ? 'block' : 'hidden'
@@ -109,12 +140,22 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
         <h2 className="text-xl font-bold m-2 text-stone-200 text-center transform rotate-y-180">{player.name}</h2>
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Phone: {player.phoneNumber}</p>
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Email: {player.mail}</p>
-        <hr width="100%"/>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180"> Games Played: {player.gamesPlayed}</p>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Goals: {player.goals}</p>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Assists: {player.assists}</p>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Yellow Cards: {player.yellowCards}</p>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Red Cards: {player.redCards}</p>
+        <hr width="100%" />
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
+          Games Played: {playerStats.total_games_played}
+        </p>
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
+          Goals: {playerStats.total_goals}
+        </p>
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
+          Assists: {playerStats.total_assists}
+        </p>
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
+          Yellow Cards: {playerStats.total_yellow_cards}
+        </p>
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
+          Red Cards: {playerStats.total_red_cards}
+        </p>
       </div>
     </div>
   );
