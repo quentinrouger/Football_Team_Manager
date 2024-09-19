@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const ChangeUsernameModal = ({ isOpen, onClose }) => {
@@ -63,6 +64,11 @@ const ChangeUsernameModal = ({ isOpen, onClose }) => {
       </div>
     )
   );
+};
+
+ChangeUsernameModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ChangeUsernameModal;

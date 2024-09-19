@@ -21,7 +21,7 @@ const GameCard = ({ game }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ stats: updatedPlayers }),
+        body: JSON.stringify({ game_id: game.id,stats: updatedPlayers }),
       });
       if (!response.ok) {
         throw new Error('Failed to update player stats');

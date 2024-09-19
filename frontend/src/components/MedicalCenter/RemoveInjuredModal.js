@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const RemoveInjuredModal = ({ player, onClose, onRemove }) => {
@@ -37,6 +38,14 @@ const RemoveInjuredModal = ({ player, onClose, onRemove }) => {
       </div>
     </div>
   );
+};
+
+RemoveInjuredModal.propTypes = {
+  player: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default RemoveInjuredModal;

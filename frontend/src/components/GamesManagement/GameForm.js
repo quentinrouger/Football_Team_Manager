@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const GameForm = ({ onSubmit, onClose }) => {
@@ -140,6 +141,11 @@ const GameForm = ({ onSubmit, onClose }) => {
       </div>
     </div>
   );
+};
+
+GameForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default GameForm;

@@ -146,10 +146,10 @@ const getGameMatchStats = async (req, res) => {
 };
 
 const updatePlayerStats = async (req, res) => {
-  const { stats } = req.body;
+  const { game_id, stats } = req.body; // Get game_id from request body
 
-  if (!Array.isArray(stats)) {
-    return res.status(400).json({ error: 'Invalid stats format' });
+  if (!game_id || !Array.isArray(stats)) {
+    return res.status(400).json({ error: 'Invalid game_id or stats format' });
   }
 
   const connection = await db.getConnection();
@@ -161,12 +161,12 @@ const updatePlayerStats = async (req, res) => {
       const { player_id, goals, assists, minutes_played, yellow_cards, red_cards, gameStarted } = stat;
 
       const [results] = await connection.execute(
-        'UPDATE player_match_stats SET goals = ?, assists = ?, minutes_played = ?, yellow_cards = ?, red_cards = ?, gameStarted = ? WHERE player_id = ?',
-        [goals, assists, minutes_played, yellow_cards, red_cards, gameStarted ? 1 : 0, player_id]
+        'UPDATE player_match_stats SET goals = ?, assists = ?, minutes_played = ?, yellow_cards = ?, red_cards = ?, gameStarted = ? WHERE player_id = ? AND game_id = ?', // Add game_id to the WHERE clause
+        [goals, assists, minutes_played, yellow_cards, red_cards, gameStarted ? 1 : 0, player_id, game_id] // Include game_id in the parameters
       );
 
       if (results.affectedRows === 0) {
-        throw new Error(`No rows updated for player_id ${player_id}`);
+        throw new Error(`No rows updated for player_id ${player_id} in game_id ${game_id}`);
       }
     }
 
@@ -177,10 +177,10 @@ const updatePlayerStats = async (req, res) => {
     await connection.rollback();
     console.error('Error updating player stats:', error);
     res.status(500).json({ error: 'Failed to update player stats' });
-    
   } finally {
     connection.release();
   }
 };
+
 
 module.exports = { addGame, addPlayerMatchStats, getAllGames, getPlayerStats, getGameMatchStats, updatePlayerStats };

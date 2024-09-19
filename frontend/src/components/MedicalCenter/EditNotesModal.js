@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const EditNotesModal = ({ player, onSave, onClose }) => {
@@ -43,6 +44,16 @@ const EditNotesModal = ({ player, onSave, onClose }) => {
       </div>
     </div>
   );
+};
+
+EditNotesModal.propTypes = {
+  player: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    notes: PropTypes.string,
+  }).isRequired,
+  onSave: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default EditNotesModal;

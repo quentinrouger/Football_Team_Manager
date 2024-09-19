@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const ChangeTeamNameModal = ({ isOpen, onClose }) => {
@@ -64,5 +65,10 @@ const ChangeTeamNameModal = ({ isOpen, onClose }) => {
     )
   );
 }
+
+ChangeTeamNameModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default ChangeTeamNameModal;

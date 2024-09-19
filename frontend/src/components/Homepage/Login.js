@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Login = ( {setIsAuthenticated}) => {
+const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const Login = ( {setIsAuthenticated}) => {
 
       const data = await response.json();
 
-      // localStorage.setItem('token', data.token);
       localStorage.setItem('username', data.user.username);
       localStorage.setItem('teamName', data.user.teamName);
 
@@ -97,6 +97,10 @@ const Login = ( {setIsAuthenticated}) => {
       <ToastContainer />
     </div>
   );
+};
+
+Login.propTypes = {
+  setIsAuthenticated: PropTypes.func.isRequired,
 };
 
 export default Login;

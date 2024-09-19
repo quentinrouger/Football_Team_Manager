@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import DeleteAccountModal from './DeleteAccountModal';
 import ChangeUsernameModal from './ChangeUsernameModal';
 import ChangeTeamNameModal from './ChangeTeamNameModal';
-
 
 const SettingsMenu = ({ isOpen, onClose }) => {
   const [isDeleteOpen, setDeleteOpen] = useState(false);
@@ -83,6 +83,11 @@ const SettingsMenu = ({ isOpen, onClose }) => {
       </div>
     )
   );
+};
+
+SettingsMenu.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default SettingsMenu;

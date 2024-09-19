@@ -80,11 +80,11 @@ const NavBar = () => {
       className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline inline-flex items-center"
     >
       Logout
-      <img
-        src="/images/logout-icon.png"
-        alt="Logout"
-        className="w-4 h-4 ml-2"
-      />
+    <img
+      src="/images/logout-icon.png"
+      alt="Logout"
+      className="w-4 h-4 ml-2"
+    />
     </button>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DeletePlayerModal = ({ player, onConfirmDelete, onCancel }) => {
   return (
@@ -27,6 +28,15 @@ const DeletePlayerModal = ({ player, onConfirmDelete, onCancel }) => {
       </div>
     </div>
   );
+};
+
+DeletePlayerModal.propTypes = {
+  player: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  onConfirmDelete: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default DeletePlayerModal;

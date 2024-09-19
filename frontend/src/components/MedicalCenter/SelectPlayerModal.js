@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const SelectPlayerModal = ({ players, onSelect, onClose }) => {
@@ -77,6 +78,18 @@ const SelectPlayerModal = ({ players, onSelect, onClose }) => {
       </div>
     </div>
   );
+};
+
+SelectPlayerModal.propTypes = {
+  players: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isInjured: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  onSelect: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default SelectPlayerModal;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -134,6 +135,18 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
       </div>
     </div>
   );
+};
+
+InjuredPlayerCard.propTypes = {
+  player: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    photo: PropTypes.string,
+    birthDate: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    notes: PropTypes.string,
+  }).isRequired,
+  onEditNotes: PropTypes.func.isRequired,
+  onRemovePlayer: PropTypes.func.isRequired,
 };
 
 export default InjuredPlayerCard;

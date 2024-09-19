@@ -44,7 +44,7 @@ const PlayerStatsModal = ({ isOpen, onClose, players, onSave }) => {
         {editedPlayers.length > 0 ? (
           <ul className="space-y-2">
           {editedPlayers.map((player) => (
-            <li key={player.player_id} className="p-2 border-b border-gray-300 flex items-center">
+            <li key={player.player_id} className="p-2 border border-gray-300 flex items-center">
               <div className="flex-1">
                 <p className="font-semibold flex items-center">
                   {player.player_name}:

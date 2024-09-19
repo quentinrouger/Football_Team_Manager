@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
@@ -48,7 +49,6 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
       },
     });
   
-    // Optional: Check if field is empty and show a message (not usually done here)
     // This example assumes you have a way to show individual field errors
     if (value.trim() === '' && name !== 'gameStarted') {
       toast.error(`${name.replace('_', ' ')} cannot be empty.`);
@@ -63,7 +63,12 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
     if (selectedPlayer && !addedPlayers.find((p) => p.id === selectedPlayer)) {
 
       const stats = playerStats[selectedPlayer];
-        if (!stats || !stats.goals || !stats.assists || !stats.minutes_played || !stats.yellow_cards || !stats.red_cards) {
+        if (!stats ||
+           !stats.goals ||
+            !stats.assists ||
+             !stats.minutes_played ||
+              !stats.yellow_cards ||
+               !stats.red_cards) {
         toast.error('Please fill in all stats fields for the selected player.');
       return;
   }
@@ -73,10 +78,10 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
       // Find player by id in the players array
       const playerName = players.find(player => player.id === playerId)?.name;
   
-      console.log('Adding player: ', playerName, ' with ID: ', playerId); // Debug player name
+      console.log('Adding player: ', playerName, ' with ID: ', playerId);
   
       if (!playerName) {
-        console.error('Player name not found!');  // Log an error if playerName is undefined
+        console.error('Player name not found!');
         return;
       }
 
@@ -85,8 +90,8 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
         ...playerStats,
         [selectedPlayer]: {
           ...playerStats[selectedPlayer],
-          gameStarted, // Include gameStarted in the player's stats
-          gamePlayed: '1', // Set gamePlayed to '1' by default
+          gameStarted,
+          gamePlayed: '1',
         },
       });
 
@@ -106,6 +111,20 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
       setSelectedPlayer(null);
       setGameStarted('0');
     }
+  };
+
+  // Function to edit player stats from the added list
+  const handleEditPlayer = (playerId) => {
+    setSelectedPlayer(playerId);
+    setGameStarted(playerStats[playerId]?.gameStarted || '0');
+  };
+
+  // Function to remove a player from the addedPlayers list
+  const handleRemovePlayer = (playerId) => {
+    setAddedPlayers(addedPlayers.filter((player) => player.id !== playerId));
+    const updatedStats = { ...playerStats };
+    delete updatedStats[playerId];
+    setPlayerStats(updatedStats);
   };
 
   const handleSubmit = async (e) => {
@@ -160,6 +179,9 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
   
       // Close the modal or perform any other necessary actions
       onClose();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error('Error canceling player stats submission:', error);
     }
@@ -177,7 +199,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 <select
                   value={selectedPlayer || ''}
                   onChange={handlePlayerChange}
-                  className="w-full border border-gray-300 p-2 m-3 rounded"
+                  className="w-full shadow-lg border-2 border-gray-300 p-2 m-3 rounded"
                 >
                   <option value="" disabled>Select player</option>
                   {players.map((player) => (
@@ -200,7 +222,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                     name="goals"
                     value={playerStats[selectedPlayer]?.goals || ''}
                     onChange={handleStatChange}
-                    className="w-full border border-gray-300 p-2 rounded"
+                    className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
                     required
                   />
                 </label>
@@ -212,7 +234,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                     name="assists"
                     value={playerStats[selectedPlayer]?.assists || ''}
                     onChange={handleStatChange}
-                    className="w-full border border-gray-300 p-2 rounded"
+                    className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
                     required
                   />
                 </label>
@@ -224,7 +246,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                     name="minutes_played"
                     value={playerStats[selectedPlayer]?.minutes_played || ''}
                     onChange={handleStatChange}
-                    className="w-full border border-gray-300 p-2 rounded"
+                    className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
                     required
                   />
                 </label>
@@ -236,7 +258,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                     name="yellow_cards"
                     value={playerStats[selectedPlayer]?.yellow_cards || ''}
                     onChange={handleStatChange}
-                    className="w-full border border-gray-300 p-2 rounded"
+                    className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
                     required
                   />
                 </label>
@@ -248,17 +270,17 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                     name="red_cards"
                     value={playerStats[selectedPlayer]?.red_cards || ''}
                     onChange={handleStatChange}
-                    className="w-full border border-gray-300 p-2 rounded"
+                    className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
                     required
                   />
                 </label>
 
-                <label className="block mb-2">
+                <label className="mb-2 flex items-center">
                   <input
                     type="checkbox"
                     checked={gameStarted === '1'}
                     onChange={handleGameStartedChange}
-                    className="mr-2"
+                    className=" m-6 w-6 h-6"
                   />
                   Game Started
                 </label>
@@ -291,8 +313,20 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                   <h3 className="font-semibold m-2">Added Players</h3>
                   <ul>
                     {addedPlayers.map((player) => (
-                      <li key={player.id} className="border-b bg-gray-200 py-2 px-4">
-                        ✏️ {player.name}
+                    <li key={player.id} className="flex justify-between items-center py-1">
+                        <span
+                          className="cursor-pointer text-sky-500 hover:underline"
+                          onClick={() => handleEditPlayer(player.id)}
+                        >
+                          {player.name}
+                        </span>
+                        <button
+                          type="button"
+                          className="text-red-500 hover:underline"
+                          onClick={() => handleRemovePlayer(player.id)}
+                        >
+                          Remove
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -318,6 +352,12 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
       </div>
     </div>
   );
+};
+
+AddPlayerStatsForm.propTypes = {
+  gameId: PropTypes.number.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AddPlayerStatsForm;

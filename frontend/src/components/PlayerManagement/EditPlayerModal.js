@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const formatDateForInput = (isoDate) => {
@@ -196,6 +197,20 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
       </div>
     </div>
   );
+};
+
+EditPlayerModal.propTypes = {
+  player: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    birthDate: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
+    mail: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    photo: PropTypes.string,
+  }).isRequired,
+  onSave: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default EditPlayerModal;

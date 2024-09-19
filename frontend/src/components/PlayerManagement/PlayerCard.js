@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -159,6 +160,20 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
       </div>
     </div>
   );
+};
+
+PlayerCard.propTypes = {
+  player: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    photo: PropTypes.string,
+    birthDate: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string,
+    mail: PropTypes.string,
+  }).isRequired,
+  onEditPlayer: PropTypes.func.isRequired,
+  onDeletePlayer: PropTypes.func.isRequired,
 };
 
 export default PlayerCard;
