@@ -83,7 +83,8 @@ const GameCard = ({ game }) => {
           isOpen={isModalOpen} 
           onClose={closeModal} 
           onSave={handleSave} // Pass the save handler to the form
-          players={game.playerStats}  // Pass the player stats here
+          players={game.playerStats}
+          gameId={game.id} // Pass the game ID to the form remove this line
         />
       )}
     </>
