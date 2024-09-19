@@ -34,6 +34,20 @@ const StatsDashboard = () => {
               },
             });
 
+            if (statsResponse.status === 404) {
+              // Return default stats if none are found
+              return {
+                ...player,
+                total_games_played: 0,
+                total_games_started: 0,
+                total_minutes_played: 0,
+                total_goals: 0,
+                total_assists: 0,
+                total_yellow_cards: 0,
+                total_red_cards: 0,
+              };
+            }
+
             if (!statsResponse.ok) {
               throw new Error(`Failed to fetch stats for player ${player.id}: ${statsResponse.statusText}`);
             }

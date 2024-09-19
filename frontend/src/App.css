@@ -23,3 +23,8 @@
   grid-auto-rows: minmax(350px, auto);
   display: grid;
 }
+
+.match-grid {
+  grid-auto-rows: minmax(275px, auto);
+  display: grid;
+}

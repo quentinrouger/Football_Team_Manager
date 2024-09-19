@@ -150,13 +150,13 @@ const AddPlayerForm = ({ addPlayer }) => {
 
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Add Player
               </button>
               <button
                 onClick={handleClose}
-                className="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md"
+                className="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 Cancel
               </button>

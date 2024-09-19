@@ -166,7 +166,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
         <div className="overflow-y-auto max-h-[80vh] p-6">
           <h2 className="text-2xl font-bold mb-4">Add Player Stats</h2>
@@ -266,7 +266,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 <button
                   type="button"
                   onClick={handleAddPlayer}
-                  className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                  className="bg-sky-500 text-white py-2 px-4 rounded hover:bg-sky-600"
                 >
                   Add Player Stats
                 </button>

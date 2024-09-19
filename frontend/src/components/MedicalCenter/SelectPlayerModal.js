@@ -54,19 +54,19 @@ const SelectPlayerModal = ({ players, onSelect, onClose }) => {
               rows="4"
             />
           </div>
-          <div className="flex justify-end space-x-2">
+          <div className="flex justify-start space-x-2">
+            <button
+              type="submit"
+              className="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded"
+            >
+              Confirm
+            </button>
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 text-gray-700 py-2 px-4 rounded"
+              className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
             >
               Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded"
-            >
-              Confirm
             </button>
           </div>
         </form>

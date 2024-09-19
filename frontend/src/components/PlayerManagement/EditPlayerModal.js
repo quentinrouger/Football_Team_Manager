@@ -173,13 +173,13 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="bg-sky-500 text-white px-4 py-2 rounded-md"
+                className="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600"
               >
                 Save Changes
               </button>
               <button
                 type="button"
-                className="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md"
+                className="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
                 onClick={onClose} // Close modal without saving
               >
                 Cancel

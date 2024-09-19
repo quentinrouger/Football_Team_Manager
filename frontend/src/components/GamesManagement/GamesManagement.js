@@ -55,27 +55,25 @@ const Games = () => {
     setCurrentStep('viewGames'); // Reset the step to view games after stats are submitted
   };
   
-
   const handleCloseForm = () => {
     setShowForm(false);
     setCurrentStep('viewGames'); // Reset step when the form is closed
   };
   
-
   return (
     <div className="min-h-screen flex flex-col bg-cover bg-center" style={{ backgroundImage: "url('/images/background.png')" }}>
       <NavBar />
       <div className="container mx-auto p-4 flex-grow">
         <h1 className="text-6xl text-white text-center font-bold m-12">Games</h1>
         
-          <>
+          {/* <> */}
             <button
               onClick={handleAddGame}
-              className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 ml-10"
+              className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 ml-10"
             >
               Add New Game
             </button>
-            <div className="grid w-full h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-10">
+            <div className="match-grid w-full h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-10">
               {games.length > 0 ? (
                 games.map((game) => (
                   <div key={game.id} className="h-full w-full">
@@ -86,7 +84,7 @@ const Games = () => {
                 <p className='text-xl m-1 font-semibold text-stone-200'>No games found.</p>
               )}
             </div>
-          </>
+          {/* </> */}
 
         {showForm && currentStep === 'addGame' && (
           <GameForm

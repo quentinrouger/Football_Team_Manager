@@ -4,7 +4,7 @@ const {
   addPlayerMatchStats, 
   getAllGames, 
   getGameMatchStats, 
-  updatePlayerMatchStats,
+  updatePlayerStats,
   getPlayerStats
 } = require('../controllers/gamesController');
 const verifyToken = require('../middleware/authMiddleware');
@@ -33,6 +33,6 @@ router.get('/games/:game_id/stats', verifyToken, getGameMatchStats);
 
 // Route to update player match stats for a specific game and player
 // Endpoint: PUT /games/:game_id/player-stats/:player_stats_id/:player_id
-router.put('/games/:game_id/player-stats/:player_stats_id/:player_id', verifyToken, updatePlayerMatchStats);
+router.put('/games/update-player-stats', verifyToken, updatePlayerStats);
 
 module.exports = router;

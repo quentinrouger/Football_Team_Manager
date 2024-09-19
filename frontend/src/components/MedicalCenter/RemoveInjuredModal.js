@@ -25,7 +25,7 @@ const RemoveInjuredModal = ({ player, onClose, onRemove }) => {
           </button>
           <button
             onClick={onClose}
-            className="bg-gray-300 py-2 px-4 rounded hover:bg-gray-400"
+            className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
           >
             Cancel
           </button>

@@ -22,10 +22,10 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
     : '/images/default-profile.png';
 
   const positionColors = {
-    Goalkeeper: 'bg-gradient-to-br from-slate-600 via-stone-500 to-slate-600',
-    Defender: 'bg-gradient-to-br from-teal-600 via-emerald-500 to-teal-600',
-    Midfielder: 'bg-gradient-to-br from-indigo-500 via-cyan-500 to-indigo-500',
-    Forward: 'bg-gradient-to-br from-orange-600 via-amber-500 to-orange-600',
+    Goalkeeper: 'bg-gradient-to-br from-red-300 via-stone-500 to-red-300',
+    Defender: 'bg-gradient-to-br from-red-300 via-emerald-500 to-red-300',
+    Midfielder: 'bg-gradient-to-br from-red-300 via-cyan-500 to-red-300',
+    Forward: 'bg-gradient-to-br from-red-300 via-amber-500 to-red-300',
   };
 
   const cardColor = positionColors[player.position] || 'bg-gradient-to-r from-gray-400 to-gray-600';
@@ -54,11 +54,11 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
 
   return (
     <div
-      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-4  from-stone-400 to-stone-400 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
+      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-2 from-stone-400 to-stone-400 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
         isFlipped ? 'transform rotate-y-180' : 'hover:scale-105'
       } ${cardColor}`}
       onClick={handleFlip}
-      style={{ perspective: '1000px' }}
+      style={{ perspective: '1000px'}}
     >
       {/* Only show buttons on the front side */}
       {!isFlipped && (
@@ -69,8 +69,8 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
             onClick={handleEditClick}
           >
             Edit notes
-          </button>
 
+          </button>
           {/* Remove button */}
           <button
             className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-3 py-1 text-sm z-10"
@@ -102,7 +102,7 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
           src="/images/injury.png"
           alt="Medical icon"
           className="absolute bottom-0 right-0 w-10 h-10 mt-2"
-          style={{ margin: '10px' }} // Optional: Add some margin if needed
+          style={{ margin: '10px' }}
         />
       </div>
 

@@ -25,13 +25,13 @@ const EditNotesModal = ({ player, onSave, onClose }) => {
         <div className="flex justify-end">
           <button
             onClick={handleSave}
-            className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
+            className="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded mr-2"
           >
             Save
           </button>
           <button
             onClick={onClose}
-            className="bg-gray-500 text-white py-2 px-4 rounded"
+            className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
           >
             Cancel
           </button>

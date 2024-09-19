@@ -121,9 +121,9 @@ const GameForm = ({ onSubmit, onClose }) => {
           </label>
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="bg-sky-500 text-white py-2 px-4 rounded hover:bg-sky-600"
           >
-            Continue to Add Player Stats
+            Submit game and Add Player Stats
           </button>
           <button
             type="button"
