@@ -12,8 +12,12 @@ const RemoveInjuredModal = ({ player, onClose, onRemove }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded shadow-lg w-80">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={onClose}
+      >
+      <div className="bg-white p-6 rounded shadow-lg w-80"
+        onClick={(e) => e.stopPropagation()}
+        >
         <h2 className="text-xl font-semibold mb-4">Remove Player from Medical Center</h2>
         <p className="mb-4">Are you sure you want to remove {player.name} from the medical center? This action will also clear the notes.</p>
         <div className="flex justify-end gap-4">

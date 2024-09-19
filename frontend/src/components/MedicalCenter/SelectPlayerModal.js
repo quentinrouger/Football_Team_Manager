@@ -17,9 +17,13 @@ const SelectPlayerModal = ({ players, onSelect, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">Select Player</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={onClose}
+      >
+      <div className="bg-white p-6 rounded shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+        >
+        <h2 className="text-2xl font-bold text-center mb-4">Select Player</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="player" className="block text-sm font-medium text-gray-700">
@@ -29,7 +33,7 @@ const SelectPlayerModal = ({ players, onSelect, onClose }) => {
               id="player"
               value={selectedPlayer}
               onChange={(e) => setSelectedPlayer(e.target.value)}
-              className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
               required
             >
               <option value="">Select a player</option>
@@ -50,7 +54,7 @@ const SelectPlayerModal = ({ players, onSelect, onClose }) => {
               id="notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="border border-gray-300 rounded-md px-3 py-2 w-full"
+              className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
               rows="4"
             />
           </div>

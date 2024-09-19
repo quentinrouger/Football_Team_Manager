@@ -14,13 +14,17 @@ const EditNotesModal = ({ player, onSave, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-        <h2 className="text-xl font-bold mb-4">Edit Notes for {player.name}</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={onClose}
+      >
+      <div className="bg-white p-6 rounded-lg shadow-lg w-1/3"
+        onClick={(e) => e.stopPropagation()}
+        >
+        <h2 className="text-xl font-bold text-center mb-4">Edit Notes for {player.name}</h2>
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          className="w-full h-32 border border-gray-300 p-2 rounded mb-4"
+          className="w-full h-32 shadow-lg border-2 border-gray-300 p-2 rounded mb-4"
         />
         <div className="flex justify-end">
           <button

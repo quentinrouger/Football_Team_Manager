@@ -51,8 +51,12 @@ const AddPlayerForm = ({ addPlayer }) => {
       </button>
 
       {isFormVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="relative bg-white p-6 rounded-lg shadow-lg w-80">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          onClick={handleClose}
+          >
+          <div className="relative bg-white p-6 rounded-lg shadow-lg w-80" 
+            onClick={(e) => e.stopPropagation()}
+            >
             <button
               onClick={handleClose}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"
@@ -60,7 +64,7 @@ const AddPlayerForm = ({ addPlayer }) => {
             >
               &times;
             </button>
-            <h2 className="text-2xl font-bold mb-4">Add New Player</h2>
+            <h2 className="text-2xl font-bold text-center mb-4">Add New Player</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -71,7 +75,7 @@ const AddPlayerForm = ({ addPlayer }) => {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow-lg appearance-none border-2 border-gray-300 rounded w-full py-2 px-3 text-gray-500 leading-tight "
                   required
                   autoComplete="name"
                 />
@@ -85,7 +89,7 @@ const AddPlayerForm = ({ addPlayer }) => {
                   id="birthDate"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow-lg appearance-none border-2 border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
                   required
                 />
               </div>
@@ -97,7 +101,7 @@ const AddPlayerForm = ({ addPlayer }) => {
                   id="position"
                   value={position}
                   onChange={(e) => setPosition(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow-lg appearance-none border-2 border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
                   required
                 >
                   <option value="" disabled>Select Position</option>
@@ -117,7 +121,7 @@ const AddPlayerForm = ({ addPlayer }) => {
                   id="phoneNumber"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow-lg appearance-none border-2 border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
                   required
                 />
               </div>
@@ -131,7 +135,7 @@ const AddPlayerForm = ({ addPlayer }) => {
                   id="mail"
                   value={mail}
                   onChange={(e) => setMail(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow-lg appearance-none border-2 border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
                   required
                 />
               </div>
@@ -144,7 +148,7 @@ const AddPlayerForm = ({ addPlayer }) => {
                   id="photo"
                   accept="image/*"
                   onChange={(e) => setPhoto(e.target.files[0])}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow-lg appearance-none border-2 border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
                 />
               </div>
 

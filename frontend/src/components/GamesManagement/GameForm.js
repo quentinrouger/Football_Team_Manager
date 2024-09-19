@@ -40,9 +40,13 @@ const GameForm = ({ onSubmit, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-2xl font-bold mb-4">Add New Game</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={onClose}
+      >
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg"
+        onClick={(e) => e.stopPropagation()}
+        >
+        <h2 className="text-2xl font-bold text-center mb-4">Add new Game</h2>
         <form onSubmit={handleSubmit}>
           <label className="block mb-2">
             Date:
@@ -51,7 +55,7 @@ const GameForm = ({ onSubmit, onClose }) => {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
+              className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
               required
             />
           </label>
@@ -62,7 +66,7 @@ const GameForm = ({ onSubmit, onClose }) => {
               name="opponent_team"
               value={formData.opponent_team}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
+              className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
               required
             />
           </label>
@@ -104,7 +108,7 @@ const GameForm = ({ onSubmit, onClose }) => {
               name="goals_for"
               value={formData.goals_for}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
+              className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
               required
             />
           </label>
@@ -115,7 +119,7 @@ const GameForm = ({ onSubmit, onClose }) => {
               name="goals_against"
               value={formData.goals_against}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
+              className="w-full shadow-lg border-2 border-gray-300 p-2 rounded"
               required
             />
           </label>

@@ -141,6 +141,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_games_played')}
                 >
+                  <span className="ml-2">🏟 </span>
                   Games Played {getSortSymbol('total_games_played')}
                 </th>
                 <th
@@ -149,6 +150,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_games_started')}
                 >
+                  <span className="ml-2">🚶 </span>
                   Games Started {getSortSymbol('total_games_started')}
                 </th>
                 <th
@@ -157,6 +159,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_minutes_played')}
                 >
+                  <span className="ml-2">⏱ </span>
                   Minutes Played {getSortSymbol('total_minutes_played')}
                 </th>
                 <th
@@ -165,6 +168,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_goals')}
                 >
+                  <span className="ml-2">⚽️ </span>
                   Goals {getSortSymbol('total_goals')}
                 </th>
                 <th
@@ -173,6 +177,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_assists')}
                 >
+                  <span className="ml-2">🅰️ </span>
                   Assists {getSortSymbol('total_assists')}
                 </th>
                 <th
@@ -181,6 +186,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_yellow_cards')}
                 >
+                  <span className="ml-2">🟨 </span>
                   Yellow Cards {getSortSymbol('total_yellow_cards')}
                 </th>
                 <th
@@ -189,6 +195,7 @@ const StatsDashboard = () => {
                   }`}
                   onClick={() => handleSort('total_red_cards')}
                 >
+                  <span className="ml-2">🟥 </span>
                   Red Cards {getSortSymbol('total_red_cards')}
                 </th>
                 <th

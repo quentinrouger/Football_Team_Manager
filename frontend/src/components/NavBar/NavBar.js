@@ -49,37 +49,46 @@ const NavBar = () => {
   return (
       <nav className="bg-gray-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-white text-2xl font-bold">
-            <Link to="/" className="hover:underline">Home</Link>
-          </div>
-          <div className='items-center justify-between flex'>
-            <Link to="/players" className="text-white mx-4 hover:underline">My Team</Link>
-            <Link to="/stats" className="text-white mx-4 hover:underline">Statistics</Link>
-            <Link to="/medical-center" className="text-white mx-4 hover:underline">Medical Center</Link>
-            <Link to="/games" className="text-white mx-4 hover:underline">Games</Link>
-            <button
-            onClick={() => setSettingsOpen(true)}
-            className="bg-neutral-200 hover:bg-neutral-300 text-white font-bold py-2 px-4 mx-4 rounded"
-          >
-            <img
-              src="/images/settings.png"
-              alt="Settings"
-              className="w-6 h-6"
-            />
-          </button>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline inline-flex items-center"
-            >
-              Logout
-              <img
-                src="/images/logout-icon.png"
-                alt="Logout"
-                className="w-4 h-4 ml-2"
-              />
-            </button>
-          </div>
-        </div>
+  {/* Home Link (left) */}
+  <div className="text-white text-2xl font-bold">
+    <Link to="/" className="hover:underline">Home</Link>
+  </div>
+
+  {/* Navigation Links (center) */}
+  <div className="flex-grow text-xl flex justify-center ml-28">
+    <Link to="/players" className="text-white mx-4 hover:underline">My team</Link>
+    <Link to="/stats" className="text-white mx-4 hover:underline">Team stats</Link>
+    <Link to="/medical-center" className="text-white mx-4 hover:underline">Medical Center</Link>
+    <Link to="/games" className="text-white mx-4 hover:underline">Results</Link>
+  </div>
+
+  {/* Settings and Logout Buttons (right) */}
+  <div className="flex items-center">
+    <button
+      onClick={() => setSettingsOpen(true)}
+      className="bg-neutral-200 hover:bg-neutral-300 text-white font-bold py-2 px-4 mx-4 rounded"
+    >
+      <img
+        src="/images/settings.png"
+        alt="Settings"
+        className="w-6 h-6"
+      />
+    </button>
+    
+    <button
+      onClick={handleLogout}
+      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline inline-flex items-center"
+    >
+      Logout
+      <img
+        src="/images/logout-icon.png"
+        alt="Logout"
+        className="w-4 h-4 ml-2"
+      />
+    </button>
+  </div>
+</div>
+
 
         {/* ToastContainer to render the toast notifications */}
         <ToastContainer />

@@ -50,6 +50,8 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
     e.preventDefault();
     const updatedFormData = new FormData();
 
+    console.log('formData:', formData);
+
     // Append all fields to FormData
     for (const key in formData) {
       if (key !== 'existingPhoto' && formData[key] !== null) {
@@ -79,10 +81,14 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg max-w-md w-full">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" 
+      onClick={onClose}
+      >
+      <div className="bg-white p-6 rounded-lg max-w-md w-full" 
+        onClick={(e) => e.stopPropagation()}
+        >
         <div className="overflow-y-auto max-h-[80vh] p-6">
-          <h2 className="text-xl font-bold mb-4">Edit Player</h2>
+          <h2 className="text-xl font-bold text-center mb-4">Edit Player</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700" htmlFor="name">Name</label>
@@ -92,7 +98,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                 type="text"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
                 required
                 autoComplete="name"
               />
@@ -105,7 +111,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                 type="date"
                 value={formData.birthDate}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
                 required
               />
             </div>
@@ -117,7 +123,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                 type="text"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
                 required
               />
             </div>
@@ -129,7 +135,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                 type="email"
                 value={formData.mail}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
                 required
               />
             </div>
@@ -140,7 +146,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                 id="position"
                 value={formData.position}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
                 required
               >
                 <option value="" disabled>Select Position</option>
@@ -157,7 +163,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                 id="photo"
                 type="file"
                 onChange={handleFileChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                className="shadow-lg border-2 border-gray-300 rounded-md px-3 py-2 w-full"
                 accept="image/*"
               />
               {formData.existingPhoto && !formData.photo && (
@@ -165,7 +171,7 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
                   <img
                     src={`http://localhost:5000/uploads/${formData.existingPhoto}`}
                     alt="Current"
-                    className="w-32 h-32 object-cover"
+                    className="w-32 h-32 object-cover shadow"
                   />
                 </div>
               )}
