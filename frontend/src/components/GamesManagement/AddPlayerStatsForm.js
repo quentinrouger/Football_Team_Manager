@@ -306,7 +306,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 type="submit"
                 className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
               >
-                Submit All Player Stats
+                Submit Player Stats
               </button>
             </div>
           </form>

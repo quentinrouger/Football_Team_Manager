@@ -6,7 +6,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        roboto: ['Roboto', 'sans-serif'],
+        poppins: ["Poppins", "sans-serif"],
+      },
+      animation: {
+        'scale-smooth': 'scaleSmooth 2s infinite',
+      },
+      keyframes: {
+        scaleSmooth: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.1)' },
+        },
       },
     },
   },

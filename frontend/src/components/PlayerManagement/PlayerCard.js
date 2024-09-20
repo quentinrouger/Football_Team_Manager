@@ -11,6 +11,9 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
     total_red_cards: 0,
     total_games_played: 0,
   });
+  const [isHovered, setIsHovered] = useState(false); // Track hover state
+  const [showEditTooltip, setShowEditTooltip] = useState(false);
+  const [showDeleteTooltip, setShowDeleteTooltip] = useState(false);
 
   // Fetch player stats from the player_match_stats table
   useEffect(() => {
@@ -24,12 +27,10 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
           },
         });
 
-        // Check if the request was successful
         if (!response.ok) {
           throw new Error(`Failed to fetch player stats: ${response.statusText}`);
         }
 
-        // Parse the JSON response and update player stats
         const data = await response.json();
         setPlayerStats(data);
       } catch (error) {
@@ -59,10 +60,10 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
     : '/images/default-profile.png';
 
   const positionColors = {
-    Goalkeeper: 'bg-gradient-to-br from-slate-600 via-stone-500 to-slate-600',
-    Defender: 'bg-gradient-to-br from-teal-600 via-emerald-500 to-teal-600',
-    Midfielder: 'bg-gradient-to-br from-indigo-500 via-cyan-500 to-indigo-500',
-    Forward: 'bg-gradient-to-br from-orange-600 via-amber-500 to-orange-600',
+    Goalkeeper: 'bg-gradient-to-br from-slate-400 via-stone-500 to-slate-400',
+    Defender: 'bg-gradient-to-br from-zinc-400 via-emerald-500 to-zinc-400',
+    Midfielder: 'bg-gradient-to-br from-zinc-400 via-cyan-500 to-zinc-400',
+    Forward: 'bg-gradient-to-br from-zinc-400 via-amber-500 to-zinc-400',
   };
 
   const cardColor = positionColors[player.position] || 'bg-gradient-to-r from-gray-400 to-gray-600';
@@ -91,27 +92,35 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
 
   return (
     <div
-      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-4  from-stone-400 to-stone-400 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
+      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-4   cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
         isFlipped ? 'transform rotate-y-180' : 'hover:scale-105'
       } ${cardColor}`}
       onClick={handleFlip}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{ perspective: '1000px' }}
     >
-      {!isFlipped && (
+      {isHovered && !isFlipped && (
         <>
           <button
-            className="absolute top-2 left-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full px-3 py-1 text-sm z-10"
+            className="absolute top-2 left-2 bg-gray-500 hover:bg-gray-700 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleEditClick}
+            onMouseEnter={() => setShowEditTooltip(true)}
+            onMouseLeave={() => setShowEditTooltip(false)}
           >
-            Edit
+            ✏️
           </button>
+          <Tooltip message="Edit Player" visible={showEditTooltip} style={{ top: '40px', left: '3px' }} />
 
           <button
-            className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-3 py-1 text-sm z-10"
+            className="absolute top-2 right-2 bg-red-200 hover:bg-red-400 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleDeleteClick}
+            onMouseEnter={() => setShowDeleteTooltip(true)}
+            onMouseLeave={() => setShowDeleteTooltip(false)}
           >
-            Delete
+            🗑️
           </button>
+          <Tooltip message="Delete Player" visible={showDeleteTooltip} style={{ top: '40px', right: '3px' }}/>
         </>
       )}
 
@@ -130,7 +139,7 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
         </div>
         <h2 className="text-xl font-bold m-2 text-stone-200 text-center">{player.name}</h2>
         <p className="text-md font-semibold text-stone-200 text-center"> {formattedBirthDate} ({age})</p>
-        <p className="text-md font-semibold text-stone-200 text-center">Position: {player.position}</p>
+        <p className="text-md font-semibold text-stone-200 text-center">Position : {player.position}</p>
       </div>
 
       <div
@@ -139,28 +148,34 @@ const PlayerCard = ({ player, onEditPlayer, onDeletePlayer }) => {
         }`}
       >
         <h2 className="text-xl font-bold m-2 text-stone-200 text-center transform rotate-y-180">{player.name}</h2>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Phone: {player.phoneNumber}</p>
-        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Email: {player.mail}</p>
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Phone : {player.phoneNumber}</p>
+        <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">Email : {player.mail}</p>
         <hr width="100%" />
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
-          Games Played: {playerStats.total_games_played}
+          Games Played : {playerStats.total_games_played}
         </p>
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
-          Goals: {playerStats.total_goals}
+          Goals : {playerStats.total_goals}
         </p>
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
-          Assists: {playerStats.total_assists}
+          Assists : {playerStats.total_assists}
         </p>
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
-          Yellow Cards: {playerStats.total_yellow_cards}
+          Yellow Cards : {playerStats.total_yellow_cards}
         </p>
         <p className="text-md m-1 font-semibold text-stone-200 text-center transform rotate-y-180">
-          Red Cards: {playerStats.total_red_cards}
+          Red Cards : {playerStats.total_red_cards}
         </p>
       </div>
     </div>
   );
 };
+
+const Tooltip = ({ message, visible, style }) => (
+  <div className={`absolute z-20 bg-black text-white text-xs rounded p-1 ${visible ? 'block' : 'hidden'}`} style={style}>
+    {message}
+  </div>
+);
 
 PlayerCard.propTypes = {
   player: PropTypes.shape({

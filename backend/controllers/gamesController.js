@@ -14,6 +14,35 @@ const addGame = async (req, res) => {
   }
 };
 
+const deleteGame = async (req, res) => {
+  const { game_id } = req.params;
+
+  const connection = await db.getConnection();
+  try {
+    await connection.beginTransaction();
+
+    // First, delete player match stats associated with the game
+    await connection.query('DELETE FROM player_match_stats WHERE game_id = ?', [game_id]);
+
+    // Then, delete the game itself
+    const [result] = await connection.query('DELETE FROM games WHERE id = ?', [game_id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Game not found' });
+    }
+
+    await connection.commit();
+    res.json({ message: 'Game and associated player stats deleted successfully' });
+  } catch (err) {
+    await connection.rollback();
+    console.error('Error deleting game:', err);
+    res.status(500).json({ error: 'Failed to delete game and associated player stats' });
+  } finally {
+    connection.release();
+  }
+};
+
+
 const addPlayerMatchStats = async (req, res) => {
   const { stats } = req.body;
 
@@ -182,5 +211,25 @@ const updatePlayerStats = async (req, res) => {
   }
 };
 
+const deletePlayerMatchStats = async (req, res) => {
+  const { game_id, player_id } = req.params;
 
-module.exports = { addGame, addPlayerMatchStats, getAllGames, getPlayerStats, getGameMatchStats, updatePlayerStats };
+  try {
+    const [result] = await db.query(
+      'DELETE FROM player_match_stats WHERE game_id = ? AND player_id = ?',
+      [game_id, player_id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No stats found for this player in the specified game' });
+    }
+
+    res.json({ message: 'Player stats deleted successfully' });
+  } catch (err) {
+    console.error('SQL Error:', err);
+    res.status(500).json({ error: 'Failed to delete player match stats' });
+  }
+};
+
+
+module.exports = { addGame, deleteGame, addPlayerMatchStats, getAllGames, getPlayerStats, getGameMatchStats, updatePlayerStats, deletePlayerMatchStats };

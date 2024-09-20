@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // Track hover state
+  const [showEditTooltip, setShowEditTooltip] = useState(false);
+  const [showDeleteTooltip, setShowDeleteTooltip] = useState(false);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -23,10 +26,10 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
     : '/images/default-profile.png';
 
   const positionColors = {
-    Goalkeeper: 'bg-gradient-to-br from-red-300 via-stone-500 to-red-300',
-    Defender: 'bg-gradient-to-br from-red-300 via-emerald-500 to-red-300',
-    Midfielder: 'bg-gradient-to-br from-red-300 via-cyan-500 to-red-300',
-    Forward: 'bg-gradient-to-br from-red-300 via-amber-500 to-red-300',
+    Goalkeeper: 'bg-gradient-to-br from-red-300 via-stone-500 to-red-400',
+    Defender: 'bg-gradient-to-br from-red-300 via-emerald-500 to-red-400',
+    Midfielder: 'bg-gradient-to-br from-red-300 via-cyan-500 to-red-400',
+    Forward: 'bg-gradient-to-br from-red-300 via-amber-500 to-red-400',
   };
 
   const cardColor = positionColors[player.position] || 'bg-gradient-to-r from-gray-400 to-gray-600';
@@ -55,30 +58,36 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
 
   return (
     <div
-      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-2 from-stone-400 to-stone-400 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
+      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-2 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
         isFlipped ? 'transform rotate-y-180' : 'hover:scale-105'
       } ${cardColor}`}
       onClick={handleFlip}
+      onMouseEnter={() => setIsHovered(true)} // Set hover state
+      onMouseLeave={() => setIsHovered(false)} // Reset hover state
       style={{ perspective: '1000px'}}
     >
       {/* Only show buttons on the front side */}
-      {!isFlipped && (
+      {isHovered && !isFlipped && (
         <>
-          {/* Edit button */}
           <button
-            className="absolute top-2 left-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full px-3 py-1 text-sm z-10"
+            className="absolute top-2 left-2 bg-gray-500 hover:bg-gray-700 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleEditClick}
+            onMouseEnter={() => setShowEditTooltip(true)}
+            onMouseLeave={() => setShowEditTooltip(false)}
           >
-            Edit notes
+            ✏️
+          </button>
+          <Tooltip message="Edit Notes" visible={showEditTooltip} style={{ top: '40px', left: '3px' }} />
 
-          </button>
-          {/* Remove button */}
           <button
-            className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-3 py-1 text-sm z-10"
+            className="absolute top-2 right-2 bg-red-200 hover:bg-red-400 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleRemoveClick}
+            onMouseEnter={() => setShowDeleteTooltip(true)}
+            onMouseLeave={() => setShowDeleteTooltip(false)}
           >
-            Remove
+            🗑️
           </button>
+          <Tooltip message="Remove Player" visible={showDeleteTooltip} style={{ top: '40px', right: '3px' }}/>
         </>
       )}
 
@@ -102,7 +111,7 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
         <img
           src="/images/injury.png"
           alt="Medical icon"
-          className="absolute bottom-0 right-0 w-10 h-10 mt-2"
+          className="absolute bottom-0 right-0 w-10 h-10 mt-2 animate-scale-smooth"
           style={{ margin: '10px' }}
         />
       </div>
@@ -123,8 +132,8 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
           {/* Notes section */}
           <div className="flex flex-col items-center mt-10 mb-auto ml-5 mr-5">
             {/* Notes header, centered horizontally, slightly above the middle */}
-            <h2 className="text-md font-bold text-stone-200 text-center mb-2 transform rotate-y-180">
-              Notes:
+            <h2 className="text-lg font-bold text-stone-200 text-center mb-2 transform rotate-y-180">
+              Notes :
             </h2>
             {/* Actual notes content */}
             <p className="text-md font-semibold text-stone-200 text-justify transform rotate-y-180">
@@ -136,6 +145,12 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
     </div>
   );
 };
+
+const Tooltip = ({ message, visible, style }) => (
+  <div className={`absolute z-20 bg-black text-white text-xs rounded p-1 ${visible ? 'block' : 'hidden'}`} style={style}>
+    {message}
+  </div>
+);
 
 InjuredPlayerCard.propTypes = {
   player: PropTypes.shape({
