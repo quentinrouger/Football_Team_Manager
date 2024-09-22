@@ -7,10 +7,10 @@ const HomePage = () => {
   return (
     <div 
       className="relative flex items-center justify-center h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/Homepage2.png')" }} // Replace with your image URL
+      style={{ backgroundImage: "url('/images/Homepage2.png')" }}
     >
       {/* Overlay for darkening the background image */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-10"></div>
 
       {/* Main content */}
       <div className="relative z-10 text-center text-white p-6">

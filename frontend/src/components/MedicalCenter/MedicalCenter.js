@@ -121,7 +121,7 @@ const MedicalCenter = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/background.png')" }}
+      style={{ backgroundImage: "url('/images/Homepage2-.png')" }}
     >
       <NavBar />
       <div className="container mx-auto p-4 flex-grow">

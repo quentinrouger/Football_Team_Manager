@@ -61,7 +61,7 @@ const Games = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col bg-cover bg-center" style={{ backgroundImage: "url('/images/background.png')" }}>
+    <div className="min-h-screen flex flex-col bg-cover bg-center" style={{ backgroundImage: "url('/images/Homepage2-.png')" }}>
       <NavBar />
       <div className="container mx-auto p-4 flex-grow">
         <h1 className="text-6xl text-white text-center font-bold m-12">Results</h1>
