@@ -300,7 +300,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 onClick={handleCancel}
                 className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
               >
-                Cancel
+                Do it Later
               </button>
               <button
                 type="submit"

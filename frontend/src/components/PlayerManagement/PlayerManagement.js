@@ -10,7 +10,6 @@ const PlayerManagement = () => {
   const [players, setPlayers] = useState([]);
   const [filteredPlayers, setFilteredPlayers] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState('');
-  const [teamName, setTeamName] = useState('');
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [deletingPlayer, setDeletingPlayer] = useState(null);
 
@@ -18,13 +17,6 @@ const PlayerManagement = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-
-        // The cookie will be automatically sent by the browser
-        const storedTeamName = localStorage.getItem('teamName');
-        
-        if (storedTeamName) {
-          setTeamName(storedTeamName);
-        }
 
         // Make the fetch request to get players
         const response = await fetch('http://localhost:5000/api/players', {
@@ -156,11 +148,7 @@ const PlayerManagement = () => {
       style={{ backgroundImage: "url('/images/Homepage2-.png')" }}
     >
       <NavBar />
-      <div className="container mx-auto p-4 flex-grow">
-        <h1 className="text-6xl text-white text-center font-bold m-12 font-poppins">
-          {teamName || 'My Team'}
-        </h1>
-        
+      <div className="container mt-24 mx-auto p-4 flex-grow">
         <div className="flex justify-between items-center mb-6 ml-10">
           {/* AddPlayerForm */}
           <div>

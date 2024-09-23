@@ -127,8 +127,8 @@ const StatsDashboard = () => {
       style={{ backgroundImage: "url('/images/Homepage2-.png')" }}
     >
       <NavBar />
-      <div className="container mx-auto p-4 flex-grow">
-        <h1 className="text-6xl text-white text-center font-bold m-16">Team Stats</h1>
+      <div className="container mt-28 mx-auto p-4 flex-grow">
+        {/* <h1 className="text-7xl text-white text-center font-bold m-16">Team Stats</h1> */}
   
         <div className="overflow-x-auto">
           <table className="min-w-full rounded-t-xl table-auto">

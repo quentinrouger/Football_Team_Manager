@@ -124,8 +124,7 @@ const MedicalCenter = () => {
       style={{ backgroundImage: "url('/images/Homepage2-.png')" }}
     >
       <NavBar />
-      <div className="container mx-auto p-4 flex-grow">
-        <h1 className="text-6xl text-white text-center font-bold m-12">Medical Center</h1>
+      <div className="container mt-24 mx-auto p-4 flex-grow">
         <button
           onClick={handleAddToMedicalCenter}
           // className="bg-red-500 text-white py-2 px-4 rounded mb-6 ml-10"
