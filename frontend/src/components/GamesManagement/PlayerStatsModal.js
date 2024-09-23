@@ -73,7 +73,7 @@ const PlayerStatsModal = ({ isOpen, onClose, players, onSave, gameId }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" onClick={onClose}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" onClick={onClose}>
       <div className="bg-white p-6 rounded-lg w-120" onClick={(e) => e.stopPropagation()}>
         <h2 className="text-xl font-bold text-center mb-4">Player Stats</h2>
 

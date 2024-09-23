@@ -58,7 +58,7 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
 
   return (
     <div
-      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-2 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ease-in-out ${
+      className={`relative rounded-xl shadow-xl max-w-sm w-full h-full border-2 cursor-pointer transform-style-preserve-3d transition-transform duration-500 ${
         isFlipped ? 'transform rotate-y-180' : 'hover:scale-105'
       } ${cardColor}`}
       onClick={handleFlip}

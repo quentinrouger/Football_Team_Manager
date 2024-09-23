@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import PlayerStatsModal from './PlayerStatsModal';
+import EditGameModal from './EditGameModal';
 import DeleteGameModal from './DeleteGameModal';
 import { toast } from 'react-toastify';
 
 const GameCard = ({ game }) => {
   const teamName = localStorage.getItem('teamName');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isEditButtonHovered, setIsEditButtonHovered] = useState(false);
+  const [isDeleteButtonHovered, setIsDeleteButtonHovered] = useState(false);
 
   const handleCardClick = () => {
     setIsModalOpen(true);
@@ -33,6 +36,30 @@ const GameCard = ({ game }) => {
       }
     } catch (error) {
       console.error('Error saving player stats:', error);
+    }
+  };
+
+  const handleEdit = async (editedGame) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/games/${game.id}`, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editedGame),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update game');
+      }
+    } catch (error) {
+      console.error('Error updating game:', error);
+    } finally {
+      setIsEditModalOpen(false);
+      toast.success('Game updated successfully!');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     }
   };
 
@@ -81,15 +108,16 @@ const GameCard = ({ game }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           setIsHovered(false);
-          setIsButtonHovered(false);
+          setIsEditButtonHovered(false);
+          setIsDeleteButtonHovered(false);
         }}
         onClick={handleCardClick}
       >
         {isHovered && (
           <button
             className="absolute top-2 right-2 bg-stone-200 hover:bg-stone-300 text-white rounded-full p-2"
-            onMouseEnter={() => setIsButtonHovered(true)}
-            onMouseLeave={() => setIsButtonHovered(false)}
+            onMouseEnter={() => setIsDeleteButtonHovered(true)}
+            onMouseLeave={() => setIsDeleteButtonHovered(false)}
             onClick={(e) => {
               e.stopPropagation();
               setIsDeleteModalOpen(true);
@@ -99,9 +127,29 @@ const GameCard = ({ game }) => {
           </button>
         )}
         {/* Tooltip for delete button */}
-        {isButtonHovered && (
+        {isDeleteButtonHovered && (
           <div className="absolute top-1 right-12 bg-gray-700 text-white text-sm p-1 rounded">
             Delete game
+          </div>
+        )}
+
+        {isHovered && (
+          <button
+            className="absolute top-2 left-2 bg-stone-200 hover:bg-stone-300 text-white rounded-full p-2"
+            onMouseEnter={() => setIsEditButtonHovered(true)}
+            onMouseLeave={() => setIsEditButtonHovered(false)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsEditModalOpen(true);
+            }}
+          >
+            ✏️
+          </button>
+        )}
+        {/* Tooltip for edit button */}
+        {isEditButtonHovered && (
+          <div className="absolute top-1 left-12 bg-gray-700 text-white text-sm p-1 rounded">
+            Edit game
           </div>
         )}
 
@@ -141,6 +189,15 @@ const GameCard = ({ game }) => {
           gameId={game.id}
         />
       )}
+
+      {isEditModalOpen && (
+          <EditGameModal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            onSave={handleEdit}
+            game={game}
+          />
+        )}
 
       {/* Delete confirmation modal */}
       {isDeleteModalOpen && (

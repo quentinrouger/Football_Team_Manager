@@ -1,6 +1,7 @@
 const express = require('express');
 const { 
   addGame, 
+  updateGame,
   addPlayerMatchStats, 
   getAllGames, 
   getGameMatchStats, 
@@ -16,6 +17,10 @@ const router = express.Router();
 // Route to add a new game
 // Endpoint: POST /games/add
 router.post('/games/add', verifyToken, addGame);
+
+// Route to update a game
+// Endpoint: PUT /games/:game_id
+router.put('/games/:game_id', verifyToken, updateGame);
 
 // Route to delete a game
 // Endpoint: DELETE /games/:game_id

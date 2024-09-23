@@ -14,6 +14,25 @@ const addGame = async (req, res) => {
   }
 };
 
+const updateGame = async (req, res) => {
+  const { game_id } = req.params;
+  const { goals_for, goals_against, location, opponent_team, date } = req.body;
+
+  try {
+    const result = await db.query(
+      `UPDATE games SET goals_for = ?, goals_against = ?, location = ?, opponent_team = ?, date = ? WHERE id = ?`,
+      [goals_for, goals_against, location, opponent_team, date, game_id]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Game not found' });
+    }
+    res.status(200).json({ message: 'Game updated successfully' });
+  } catch (error) {
+    console.error('Error updating game:', error);
+    res.status(500).json({ message: 'Error updating game' });
+  }
+};
+
 const deleteGame = async (req, res) => {
   const { game_id } = req.params;
 
@@ -232,4 +251,4 @@ const deletePlayerMatchStats = async (req, res) => {
 };
 
 
-module.exports = { addGame, deleteGame, addPlayerMatchStats, getAllGames, getPlayerStats, getGameMatchStats, updatePlayerStats, deletePlayerMatchStats };
+module.exports = { addGame, updateGame, deleteGame, addPlayerMatchStats, getAllGames, getPlayerStats, getGameMatchStats, updatePlayerStats, deletePlayerMatchStats };
