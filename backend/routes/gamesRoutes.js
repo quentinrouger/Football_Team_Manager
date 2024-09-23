@@ -44,7 +44,7 @@ router.get('/games/:game_id/stats', verifyToken, getGameMatchStats);
 
 // Route to update player match stats for a specific game and player
 // Endpoint: PUT /games/:game_id/player-stats/:player_stats_id/:player_id
-router.put('/games/update-player-stats', verifyToken, updatePlayerStats);
+router.put('/games/:game_id/stats', verifyToken, updatePlayerStats);
 
 // Route to delete player match stats for a specific game and player
 // Endpoint: DELETE /games/:game_id/player-stats/:player_id

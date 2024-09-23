@@ -21,7 +21,7 @@ const PlayerStatsModal = ({ isOpen, onClose, players, onSave, gameId }) => {
     );
   };
 
-  const handleSave = () => {
+  const handleSavePlayerStats = () => {
     onSave(editedPlayers);
     onClose();
     toast.success('Player stats saved successfully');
@@ -86,7 +86,7 @@ const PlayerStatsModal = ({ isOpen, onClose, players, onSave, gameId }) => {
                 {editedPlayers.map((player) => (
                   <li key={player.player_id} className="p-2 border-b border-gray-300 flex items-center">
                     <div className="flex-1">
-                      <p className="font-semibold flex items-center">{player.player_name}:</p>
+                      <p className="font-semibold flex items-center">{player.player_name}</p>
                     </div>
 
                     <div className="flex-1 flex justify-end items-center space-x-2">
@@ -189,7 +189,7 @@ const PlayerStatsModal = ({ isOpen, onClose, players, onSave, gameId }) => {
               <div className="ml-auto space-x-4">
                 <button
                   className="bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-lg"
-                  onClick={handleSave}
+                  onClick={handleSavePlayerStats}
                 >
                   Save Player Stats
                 </button>

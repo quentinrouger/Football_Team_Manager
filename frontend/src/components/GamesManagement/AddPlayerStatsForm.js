@@ -171,7 +171,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block mb-2">
-                Add a Player:
+                Add a Player :
                 <select
                   value={selectedPlayer || ''}
                   onChange={handlePlayerChange}
@@ -192,7 +192,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 <h3 className="font-semibold">Enter Stats for {playerList.find(p => p.id === selectedPlayer)?.name}</h3>
 
                 <label className="block mb-2">
-                  Goals:
+                  Goals :
                   <input
                     type="number"
                     name="goals"
@@ -204,7 +204,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 </label>
 
                 <label className="block mb-2">
-                  Assists:
+                  Assists :
                   <input
                     type="number"
                     name="assists"
@@ -216,7 +216,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 </label>
 
                 <label className="block mb-2">
-                  Minutes Played:
+                  Minutes Played :
                   <input
                     type="number"
                     name="minutes_played"
@@ -228,7 +228,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 </label>
 
                 <label className="block mb-2">
-                  Yellow Cards:
+                  Yellow Cards :
                   <input
                     type="number"
                     name="yellow_cards"
@@ -240,7 +240,7 @@ const AddPlayerStatsForm = ({ gameId, onSubmit, onClose }) => {
                 </label>
 
                 <label className="block mb-2">
-                  Red Cards:
+                  Red Cards :
                   <input
                     type="number"
                     name="red_cards"

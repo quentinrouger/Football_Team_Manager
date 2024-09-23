@@ -50,7 +50,7 @@ const GameForm = ({ onSubmit, onClose }) => {
         <h2 className="text-2xl font-bold text-center mb-4">Add new Game</h2>
         <form onSubmit={handleSubmit}>
           <label className="block mb-2">
-            Date:
+            Date :
             <input
               type="date"
               name="date"
@@ -61,7 +61,7 @@ const GameForm = ({ onSubmit, onClose }) => {
             />
           </label>
           <label className="block mb-2">
-            Opponent Team:
+            Opponent Team :
             <input
               type="text"
               name="opponent_team"
@@ -72,7 +72,7 @@ const GameForm = ({ onSubmit, onClose }) => {
             />
           </label>
           <label className="block mb-2">
-            Location:
+            Location :
             <div className="flex space-x-4 mt-2">
               <label className="inline-flex items-center">
                 <input
@@ -103,7 +103,7 @@ const GameForm = ({ onSubmit, onClose }) => {
           </label>
 
           <label className="block mb-2">
-            Goals For:
+            Goals For :
             <input
               type="number"
               name="goals_for"
@@ -114,7 +114,7 @@ const GameForm = ({ onSubmit, onClose }) => {
             />
           </label>
           <label className="block mb-4">
-            Goals Against:
+            Goals Against :
             <input
               type="number"
               name="goals_against"

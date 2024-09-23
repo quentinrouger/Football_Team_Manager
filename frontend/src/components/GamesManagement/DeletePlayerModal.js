@@ -13,7 +13,7 @@ const DeletePlayerModal = ({ isOpen, onClose, onConfirm, playerName }) => {
           <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg" onClick={onConfirm}>
             Yes, remove
           </button>
-          <button className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded-lg" onClick={onClose}>
+          <button className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg" onClick={onClose}>
             Cancel
           </button>
         </div>

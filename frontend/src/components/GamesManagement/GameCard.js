@@ -23,14 +23,15 @@ const GameCard = ({ game }) => {
 
   const handleSave = async (updatedPlayers) => {
     try {
-      const response = await fetch('http://localhost:5000/api/games/update-player-stats', {
+      const response = await fetch(`http://localhost:5000/api/games/${game.id}/stats`, {
         method: 'PUT',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ game_id: game.id, stats: updatedPlayers }),
+        body: JSON.stringify({ game_id: game.id, stats: updatedPlayers }), // Send the array of updatedPlayers
       });
+      
       if (!response.ok) {
         throw new Error('Failed to update player stats');
       }
@@ -128,14 +129,14 @@ const GameCard = ({ game }) => {
         )}
         {/* Tooltip for delete button */}
         {isDeleteButtonHovered && (
-          <div className="absolute top-1 right-12 bg-gray-700 text-white text-sm p-1 rounded">
+          <div className="absolute top-1 right-12 bg-black text-white text-sm p-1 rounded">
             Delete game
           </div>
         )}
 
         {isHovered && (
           <button
-            className="absolute top-2 left-2 bg-stone-200 hover:bg-stone-300 text-white rounded-full p-2"
+            className="absolute top-2 left-2 bg-gray-500 hover:bg-gray-700 text-white rounded-full p-2"
             onMouseEnter={() => setIsEditButtonHovered(true)}
             onMouseLeave={() => setIsEditButtonHovered(false)}
             onClick={(e) => {
@@ -146,9 +147,9 @@ const GameCard = ({ game }) => {
             ✏️
           </button>
         )}
-        {/* Tooltip for edit button */}
+
         {isEditButtonHovered && (
-          <div className="absolute top-1 left-12 bg-gray-700 text-white text-sm p-1 rounded">
+          <div className="absolute top-1 left-12 bg-black text-white text-sm p-1 rounded">
             Edit game
           </div>
         )}

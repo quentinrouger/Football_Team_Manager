@@ -13,9 +13,11 @@ const HomePage = () => {
       <div className="absolute inset-0 bg-black opacity-10"></div>
 
       {/* Main content */}
-      <div className="relative z-10 text-center text-white p-6">
-        <h1 className="text-6xl font-bold mb-4">Football Team Manager</h1>
-        <p className="text-xl w-1/2 mx-auto mb-8">Football Team Manager is a web application designed for football coaches and managers. Manage basic player informations and injuries, track team results and player statistics across the season !</p>
+      <div className="relative z-10 text-center text-white p-6"
+        style={{ top: '-50px' }}
+      >
+        <h1 className="text-7xl font-bold mb-12">Football Team Manager</h1>
+        <p className="text-xl w-1/2 mx-auto mb-12">Football Team Manager is a web application designed for football coaches and managers. Manage basic player informations and injuries, track team results and player statistics across the season !</p>
 
         {/* Buttons for Register and Login */}
         <div className="flex justify-center space-x-4">

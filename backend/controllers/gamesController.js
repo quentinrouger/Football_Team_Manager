@@ -206,6 +206,7 @@ const updatePlayerStats = async (req, res) => {
     await connection.beginTransaction();
 
     for (const stat of stats) {
+      console.log("Updating stats for player_id:", stat.player_id);
       const { player_id, goals, assists, minutes_played, yellow_cards, red_cards, gameStarted } = stat;
 
       const [results] = await connection.execute(

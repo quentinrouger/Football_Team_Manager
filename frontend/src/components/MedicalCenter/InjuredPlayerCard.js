@@ -80,7 +80,7 @@ const InjuredPlayerCard = ({ player, onEditNotes, onRemovePlayer }) => {
           <Tooltip message="Edit Notes" visible={showEditTooltip} style={{ top: '40px', left: '3px' }} />
 
           <button
-            className="absolute top-2 right-2 bg-red-200 hover:bg-red-400 text-white rounded-full px-3 py-1 text-sm z-10"
+            className="absolute top-2 right-2 bg-stone-200 hover:bg-stone-300 text-white rounded-full px-3 py-1 text-sm z-10"
             onClick={handleRemoveClick}
             onMouseEnter={() => setShowDeleteTooltip(true)}
             onMouseLeave={() => setShowDeleteTooltip(false)}
