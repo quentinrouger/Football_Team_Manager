@@ -7,9 +7,9 @@ const RemoveInjuredModal = ({ player, onClose, onRemove }) => {
     onRemove(player);
 
     toast.success('Player removed from the medical center!');
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1500);
   };
 
   return (

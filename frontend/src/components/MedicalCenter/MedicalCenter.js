@@ -12,27 +12,28 @@ const MedicalCenter = () => {
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
-  useEffect(() => {
-    const fetchPlayers = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/players', {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+  const fetchPlayers = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/players', {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch players: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        setPlayers(data);
-      } catch (error) {
-        console.error('Error fetching players:', error);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch players: ${response.statusText}`);
       }
-    };
+
+      const data = await response.json();
+      setPlayers(data);
+    } catch (error) {
+      console.error('Error fetching players:', error);
+    }
+  };
+
+  useEffect(() => {
 
     fetchPlayers();
   }, []);
@@ -69,6 +70,7 @@ const MedicalCenter = () => {
           player.id === updatedPlayer.id ? updatedPlayer : player
         )
       );
+      await fetchPlayers();
     } catch (error) {
       console.error('Error updating player injury status:', error);
     }
@@ -111,6 +113,7 @@ const MedicalCenter = () => {
       setPlayers((prevPlayers) =>
         prevPlayers.filter((p) => p.id !== updatedPlayer.id)
       );
+      await fetchPlayers();
     } catch (error) {
       console.error('Error removing player from medical center:', error);
     } finally {

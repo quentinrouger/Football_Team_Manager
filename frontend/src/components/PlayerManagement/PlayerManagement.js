@@ -13,33 +13,34 @@ const PlayerManagement = () => {
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [deletingPlayer, setDeletingPlayer] = useState(null);
 
+  const fetchPlayers = async () => {
+    try {
+
+      // Make the fetch request to get players
+      const response = await fetch('http://localhost:5000/api/players', {
+        method: 'GET', 
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    });
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`Failed to fetch players: ${response.statusText}`);
+      }
+
+      // Parse and update the state with player data
+      const data = await response.json();
+      setPlayers(data);
+      setFilteredPlayers(data);
+    } catch (error) {
+      console.error('Error fetching players:', error);
+    }
+  };
+
   // useEffect to fetch players from the server
   useEffect(() => {
-    const fetchPlayers = async () => {
-      try {
-
-        // Make the fetch request to get players
-        const response = await fetch('http://localhost:5000/api/players', {
-          method: 'GET', 
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-      });
-
-        // Check if the request was successful
-        if (!response.ok) {
-          throw new Error(`Failed to fetch players: ${response.statusText}`);
-        }
-
-        // Parse and update the state with player data
-        const data = await response.json();
-        setPlayers(data);
-        setFilteredPlayers(data);
-      } catch (error) {
-        console.error('Error fetching players:', error);
-      }
-    };
 
     fetchPlayers();
   }, []);
@@ -90,6 +91,8 @@ const PlayerManagement = () => {
       setFilteredPlayers((prevPlayers) =>
         prevPlayers.map((player) => (player.id === updatedPlayerData.id ? updatedPlayerData : player))
       );
+
+      await fetchPlayers();
       setEditingPlayer(null);
     } catch (error) {
       console.error('Error updating player:', error);

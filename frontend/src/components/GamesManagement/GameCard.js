@@ -4,7 +4,7 @@ import EditGameModal from './EditGameModal';
 import DeleteGameModal from './DeleteGameModal';
 import { toast } from 'react-toastify';
 
-const GameCard = ({ game }) => {
+const GameCard = ({ game, fetchGames }) => {
   const teamName = localStorage.getItem('teamName');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -58,9 +58,10 @@ const GameCard = ({ game }) => {
     } finally {
       setIsEditModalOpen(false);
       toast.success('Game updated successfully!');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      await fetchGames();
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1500);
     }
   };
 
@@ -83,9 +84,10 @@ const GameCard = ({ game }) => {
     } finally {
       setIsDeleteModalOpen(false);
       toast.success('Game deleted successfully!');
-      setTimeout(() => {
-        window.location.reload();
-      } , 1500);
+      await fetchGames();
+      // setTimeout(() => {
+      //   window.location.reload();
+      // } , 1500);
     }
   };
 

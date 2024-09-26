@@ -70,9 +70,9 @@ const EditPlayerModal = ({ player, onSave, onClose }) => {
 
       toast.success('Player updated successfully!');
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 2000);
 
       onClose();
     } catch (error) {

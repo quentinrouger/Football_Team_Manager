@@ -86,13 +86,16 @@ const StatsDashboard = () => {
     let sortablePlayers = [...players];
     if (sortConfig.key) {
       sortablePlayers.sort((a, b) => {
+        let total_a = a.total_goals + a.total_assists;
+        let total_b = b.total_goals + b.total_assists;
         let aValue = a[sortConfig.key];
         let bValue = b[sortConfig.key];
 
         // Special handling for "ratio"
         if (sortConfig.key === 'ratio') {
-          aValue = (a.total_goals + a.total_assists) === 0 ? -Infinity : a.total_minutes_played / (a.total_goals + a.total_assists);
-          bValue = (b.total_goals + b.total_assists) === 0 ? -Infinity : b.total_minutes_played / (b.total_goals + b.total_assists);
+
+          aValue = total_a === 0 ? Infinity : a.total_minutes_played / total_a;
+          bValue = total_b === 0 ? Infinity : b.total_minutes_played / total_b;
         }
 
         if (aValue < bValue) {

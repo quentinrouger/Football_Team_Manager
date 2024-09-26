@@ -12,9 +12,9 @@ const SelectPlayerModal = ({ players, onSelect, onClose }) => {
     if (player) onSelect(player, notes);
 
     toast.success('Player added to the medical center!');
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1500);
   };
 
   return (

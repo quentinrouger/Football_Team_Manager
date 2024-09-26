@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
-const GameForm = ({ onSubmit, onClose }) => {
+const GameForm = ({ onSubmit, onClose, fetchGames }) => {
   const [formData, setFormData] = useState({
     date: '',
     opponent_team: '',
@@ -35,6 +35,7 @@ const GameForm = ({ onSubmit, onClose }) => {
       onSubmit(data.gameId);
       // onContinue(data.gameId); // Pass game ID to the next step
       toast.success('Game added successfully');
+      await fetchGames();
     } catch (error) {
       console.error('Error adding game:', error);
     }

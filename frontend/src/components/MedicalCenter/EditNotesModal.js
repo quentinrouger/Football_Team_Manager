@@ -9,9 +9,9 @@ const EditNotesModal = ({ player, onSave, onClose }) => {
     onSave(player.id, notes);
 
     toast.success('Notes updated successfully!');
-    setTimeout(() => {
-      window.location.reload(); // Reload the page to reflect the changes
-    }, 1500);
+    // setTimeout(() => {
+    //   window.location.reload(); // Reload the page to reflect the changes
+    // }, 1500);
   };
 
   return (

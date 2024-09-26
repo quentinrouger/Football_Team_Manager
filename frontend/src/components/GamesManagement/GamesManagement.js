@@ -10,30 +10,31 @@ const Games = () => {
   const [newGameId, setNewGameId] = useState(null);
   const [showForm, setShowForm] = useState(false); // Manage form visibility
 
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/games', {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+  const fetchGames = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/games', {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch games: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        const sortedGames = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        setGames(sortedGames);
-      } catch (error) {
-        console.error('Error fetching games:', error);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch games: ${response.statusText}`);
       }
-    };
+
+      const data = await response.json();
+
+      const sortedGames = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      setGames(sortedGames);
+    } catch (error) {
+      console.error('Error fetching games:', error);
+    }
+  };
+
+  useEffect(() => {
 
     fetchGames();
   }, []);
@@ -77,7 +78,7 @@ const Games = () => {
               {games.length > 0 ? (
                 games.map((game) => (
                   <div key={game.id} className="h-full w-full">
-                    <GameCard game={game} />
+                    <GameCard game={game} fetchGames={fetchGames}/>
                   </div>
                 ))
               ) : (
@@ -90,6 +91,7 @@ const Games = () => {
           <GameForm
             onSubmit={handleGameSubmit}
             onClose={handleCloseForm}
+            fetchGames={fetchGames}
           />
         )}
 
